@@ -1,6 +1,44 @@
 {
   "packages": [
     {
+      "name": "Quantum & Q4.0",
+      "maintainer": "panStamp",
+      "websiteURL": "https://github.com/panstamp/arduino-STM32L4",
+      "email": "contact@panstamp.com",
+      "help": {
+        "online": "https://github.com/panstamp/arduino-STM32L4/issues"
+      },
+      "platforms": [
+        {
+          "name": "STM32L4 Boards",
+          "architecture": "stm32l4",
+          "version": "0.0.22",
+          "category": "Contributed",
+          "help": {
+            "online": "https://github.com/panstamp/arduino-STM32L4/issues"
+          },
+          "url": "https://github.com/panstamp/arduino-STM32L4/archive/0.1.0.tar.gz",
+          "archiveFileName": "arduino-STM32L4-0.1.0.tar.gz",
+          "checksum": "MD5:41640aec4abbc17aa15eac1edb5cc6f7",
+          "size": "16578163",
+          "boards": [
+            {"name": "Q4.0-L433CC"},
+            {"name": "Quantum-L432KC"}
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "arduino",
+              "name": "arm-none-eabi-gcc",
+              "version": "4.8.3-2014q1"
+            }
+          ]
+        }
+      ],
+      "tools":[
+      ]
+    },
+
+    {
       "name": "grumpyoldpizza",
       "maintainer": "Tlera Corp",
       "websiteURL": "https://github.com/grumpyoldpizza/arduino-STM32L4",
