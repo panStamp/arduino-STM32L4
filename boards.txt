@@ -5,7 +5,7 @@ menu.opt=Optimize
 
 ##############################################################
 
-# Tlera Dragonfly
+# Tlera Puma
 # ---------------------------------------
 Dragonfly-L476RE.name=Dragonfly-L476RE
 Dragonfly-L476RE.vid.0=0x1209
@@ -501,3 +501,264 @@ NUCLEO-L476RG.menu.opt.o2.build.flags.ldspecs=
 NUCLEO-L476RG.menu.opt.o3=Fastest
 NUCLEO-L476RG.menu.opt.o3.build.flags.optimize=-O3
 NUCLEO-L476RG.menu.opt.o3.build.flags.ldspecs=
+
+# panStamp Quantum-LoRa
+# ---------------------------------------
+Quantum-LoRa-L432KC.name=Quantum-LoRa-L432KC
+Quantum-LoRa-L432KC.vid.0=0x1209
+Quantum-LoRa-L432KC.pid.0=0x6669
+
+Quantum-LoRa-L432KC.upload.tool=stm32l4_dfu
+Quantum-LoRa-L432KC.upload.protocol=dfu
+Quantum-LoRa-L432KC.upload.maximum_size=245760
+Quantum-LoRa-L432KC.upload.use_1200bps_touch=true
+Quantum-LoRa-L432KC.upload.wait_for_upload_port=false
+Quantum-LoRa-L432KC.upload.native_usb=false
+
+Quantum-LoRa-L432KC.build.mcu=cortex-m4
+Quantum-LoRa-L432KC.build.f_cpu=80000000L
+Quantum-LoRa-L432KC.build.board=STM32L4_QUANTUM-LORA
+Quantum-LoRa-L432KC.build.arch=STM32L4
+Quantum-LoRa-L432KC.build.core=stm32l4
+Quantum-LoRa-L432KC.build.vid=0x1209
+Quantum-LoRa-L432KC.build.pid=0x6669
+Quantum-LoRa-L432KC.build.did=0xffff
+Quantum-LoRa-L432KC.build.usb_manufacturer="panStamp"
+Quantum-LoRa-L432KC.build.usb_product="Quantum-LoRa"
+Quantum-LoRa-L432KC.build.extra_flags=-DSTM32L432xx -D__FPU_PRESENT=1 -march=armv7e-m -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mabi=aapcs -mslow-flash-data -fsingle-precision-constant {build.usb_flags} {build.dosfs_flags}
+Quantum-LoRa-L432KC.build.ldscript=linker_scripts/STM32L432KC_FLASH.ld
+Quantum-LoRa-L432KC.build.openocdscript=openocd_scripts/stm32l432kc_quantum.cfg
+Quantum-LoRa-L432KC.build.variant=STM32L432KC-Quantum-LoRa
+Quantum-LoRa-L432KC.build.variant_system_libs="-L{runtime.platform.path}/system/STM32L4xx/Lib" "-L{runtime.platform.path}/system/CMSIS/Lib" -lstm32l432 -larm_cortexM4lf_math
+Quantum-LoRa-L432KC.build.variant_system_include="-I{runtime.platform.path}/system/CMSIS/Include" "-I{runtime.platform.path}/system/CMSIS/Device/ST/STM32L4xx/Include" "-I{runtime.platform.path}/system/STM32L4xx/Include" 
+
+Quantum-LoRa-L432KC.menu.usb.cdc=Serial
+Quantum-LoRa-L432KC.menu.usb.cdc.build.usb_type=USB_TYPE_CDC
+Quantum-LoRa-L432KC.menu.usb.cdc_msc=Serial + Mass Storage
+Quantum-LoRa-L432KC.menu.usb.cdc_msc.build.usb_type=USB_TYPE_CDC_MSC
+Quantum-LoRa-L432KC.menu.usb.cdc_hid=Serial + Keyboard + Mouse
+Quantum-LoRa-L432KC.menu.usb.cdc_hid.build.usb_type=USB_TYPE_CDC_HID
+Quantum-LoRa-L432KC.menu.usb.cdc_msc_hid=Serial + Mass Storage + Keyboard + Mouse
+Quantum-LoRa-L432KC.menu.usb.cdc_msc_hid.build.usb_type=USB_TYPE_CDC_MSC_HID
+Quantum-LoRa-L432KC.menu.usb.none=No USB
+Quantum-LoRa-L432KC.menu.usb.none.build.usb_type=USB_TYPE_NONE
+
+Quantum-LoRa-L432KC.menu.dosfs.none=None
+Quantum-LoRa-L432KC.menu.dosfs.none.build.dosfs_sdcard=0
+Quantum-LoRa-L432KC.menu.dosfs.none.build.dosfs_sflash=0
+Quantum-LoRa-L432KC.menu.dosfs.sdspi=SDCARD (SPI)
+Quantum-LoRa-L432KC.menu.dosfs.sdspi.build.dosfs_sdcard=1
+Quantum-LoRa-L432KC.menu.dosfs.sdspi.build.dosfs_sflash=0
+
+Quantum-LoRa-L432KC.menu.speed.80=80 MHz
+Quantum-LoRa-L432KC.menu.speed.80.build.f_cpu=80000000L
+Quantum-LoRa-L432KC.menu.speed.72=72 MHz
+Quantum-LoRa-L432KC.menu.speed.72.build.f_cpu=72000000L
+Quantum-LoRa-L432KC.menu.speed.64=64 MHz
+Quantum-LoRa-L432KC.menu.speed.64.build.f_cpu=64000000L
+Quantum-LoRa-L432KC.menu.speed.48=48 MHz
+Quantum-LoRa-L432KC.menu.speed.48.build.f_cpu=48000000L
+Quantum-LoRa-L432KC.menu.speed.32=32 MHz
+Quantum-LoRa-L432KC.menu.speed.32.build.f_cpu=32000000L
+Quantum-LoRa-L432KC.menu.speed.24=24 MHz
+Quantum-LoRa-L432KC.menu.speed.24.build.f_cpu=24000000L
+Quantum-LoRa-L432KC.menu.speed.16=16 MHz (No USB)
+Quantum-LoRa-L432KC.menu.speed.16.build.f_cpu=16000000L
+Quantum-LoRa-L432KC.menu.speed.8=8 MHz (No USB)
+Quantum-LoRa-L432KC.menu.speed.8.build.f_cpu=8000000L
+Quantum-LoRa-L432KC.menu.speed.4=4 MHz (No USB)
+Quantum-LoRa-L432KC.menu.speed.4.build.f_cpu=4000000L
+Quantum-LoRa-L432KC.menu.speed.2=2 MHz (No USB)
+Quantum-LoRa-L432KC.menu.speed.2.build.f_cpu=2000000L
+Quantum-LoRa-L432KC.menu.speed.1=1 MHz (No USB)
+Quantum-LoRa-L432KC.menu.speed.1.build.f_cpu=1000000L
+
+Quantum-LoRa-L432KC.menu.opt.os=Smallest Code
+Quantum-LoRa-L432KC.menu.opt.os.build.flags.optimize=-Os
+Quantum-LoRa-L432KC.menu.opt.os.build.flags.ldspecs=--specs=nano.specs
+Quantum-LoRa-L432KC.menu.opt.o1=Fast
+Quantum-LoRa-L432KC.menu.opt.o1.build.flags.optimize=-O1
+Quantum-LoRa-L432KC.menu.opt.o1.build.flags.ldspecs=
+Quantum-LoRa-L432KC.menu.opt.o2=Faster
+Quantum-LoRa-L432KC.menu.opt.o2.build.flags.optimize=-O2
+Quantum-LoRa-L432KC.menu.opt.o2.build.flags.ldspecs=
+Quantum-LoRa-L432KC.menu.opt.o3=Fastest
+Quantum-LoRa-L432KC.menu.opt.o3.build.flags.optimize=-O3
+Quantum-LoRa-L432KC.menu.opt.o3.build.flags.ldspecs=
+
+# panStamp Q4.0
+# ---------------------------------------
+Q40-L433CC.name=Q4.0-L433CC
+Q40-L433CC.vid.0=0x1209
+Q40-L433CC.pid.0=0x6668
+
+Q40-L433CC.upload.tool=stm32l4_dfu
+Q40-L433CC.upload.protocol=dfu
+Q40-L433CC.upload.maximum_size=245760
+Q40-L433CC.upload.use_1200bps_touch=true
+Q40-L433CC.upload.wait_for_upload_port=false
+Q40-L433CC.upload.native_usb=false
+
+Q40-L433CC.build.mcu=cortex-m4
+Q40-L433CC.build.f_cpu=80000000L
+Q40-L433CC.build.board=STM32L4_Q40
+Q40-L433CC.build.arch=STM32L4
+Q40-L433CC.build.core=stm32l4
+Q40-L433CC.build.vid=0x1209
+Q40-L433CC.build.pid=0x6668
+Q40-L433CC.build.did=0xffff
+Q40-L433CC.build.usb_manufacturer="panStamp"
+Q40-L433CC.build.usb_product="Q4.0"
+Q40-L433CC.build.extra_flags=-DSTM32L433xx -D__FPU_PRESENT=1 -march=armv7e-m -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mabi=aapcs -mslow-flash-data -fsingle-precision-constant {build.usb_flags} {build.dosfs_flags}
+Q40-L433CC.build.ldscript=linker_scripts/STM32L433CC_FLASH.ld
+Q40-L433CC.build.openocdscript=openocd_scripts/stm32l433cc_q40.cfg
+Q40-L433CC.build.variant=STM32L433CC-Q40
+Q40-L433CC.build.variant_system_libs="-L{runtime.platform.path}/system/STM32L4xx/Lib" "-L{runtime.platform.path}/system/CMSIS/Lib" -lstm32l433 -larm_cortexM4lf_math
+Q40-L433CC.build.variant_system_include="-I{runtime.platform.path}/system/CMSIS/Include" "-I{runtime.platform.path}/system/CMSIS/Device/ST/STM32L4xx/Include" "-I{runtime.platform.path}/system/STM32L4xx/Include" 
+
+Q40-L433CC.menu.usb.cdc=Serial
+Q40-L433CC.menu.usb.cdc.build.usb_type=USB_TYPE_CDC
+Q40-L433CC.menu.usb.cdc_msc=Serial + Mass Storage
+Q40-L433CC.menu.usb.cdc_msc.build.usb_type=USB_TYPE_CDC_MSC
+Q40-L433CC.menu.usb.cdc_hid=Serial + Keyboard + Mouse
+Q40-L433CC.menu.usb.cdc_hid.build.usb_type=USB_TYPE_CDC_HID
+Q40-L433CC.menu.usb.cdc_msc_hid=Serial + Mass Storage + Keyboard + Mouse
+Q40-L433CC.menu.usb.cdc_msc_hid.build.usb_type=USB_TYPE_CDC_MSC_HID
+Q40-L433CC.menu.usb.none=No USB
+Q40-L433CC.menu.usb.none.build.usb_type=USB_TYPE_NONE
+
+Q40-L433CC.menu.dosfs.none=None
+Q40-L433CC.menu.dosfs.none.build.dosfs_sdcard=0
+Q40-L433CC.menu.dosfs.none.build.dosfs_sflash=0
+Q40-L433CC.menu.dosfs.sdspi=SDCARD (SPI)
+Q40-L433CC.menu.dosfs.sdspi.build.dosfs_sdcard=1
+Q40-L433CC.menu.dosfs.sdspi.build.dosfs_sflash=0
+
+Q40-L433CC.menu.speed.80=80 MHz
+Q40-L433CC.menu.speed.80.build.f_cpu=80000000L
+Q40-L433CC.menu.speed.72=72 MHz
+Q40-L433CC.menu.speed.72.build.f_cpu=72000000L
+Q40-L433CC.menu.speed.64=64 MHz
+Q40-L433CC.menu.speed.64.build.f_cpu=64000000L
+Q40-L433CC.menu.speed.48=48 MHz
+Q40-L433CC.menu.speed.48.build.f_cpu=48000000L
+Q40-L433CC.menu.speed.32=32 MHz
+Q40-L433CC.menu.speed.32.build.f_cpu=32000000L
+Q40-L433CC.menu.speed.24=24 MHz
+Q40-L433CC.menu.speed.24.build.f_cpu=24000000L
+Q40-L433CC.menu.speed.16=16 MHz (No USB)
+Q40-L433CC.menu.speed.16.build.f_cpu=16000000L
+Q40-L433CC.menu.speed.8=8 MHz (No USB)
+Q40-L433CC.menu.speed.8.build.f_cpu=8000000L
+Q40-L433CC.menu.speed.4=4 MHz (No USB)
+Q40-L433CC.menu.speed.4.build.f_cpu=4000000L
+Q40-L433CC.menu.speed.2=2 MHz (No USB)
+Q40-L433CC.menu.speed.2.build.f_cpu=2000000L
+Q40-L433CC.menu.speed.1=1 MHz (No USB)
+Q40-L433CC.menu.speed.1.build.f_cpu=1000000L
+
+Q40-L433CC.menu.opt.os=Smallest Code
+Q40-L433CC.menu.opt.os.build.flags.optimize=-Os
+Q40-L433CC.menu.opt.os.build.flags.ldspecs=--specs=nano.specs
+Q40-L433CC.menu.opt.o1=Fast
+Q40-L433CC.menu.opt.o1.build.flags.optimize=-O1
+Q40-L433CC.menu.opt.o1.build.flags.ldspecs=
+Q40-L433CC.menu.opt.o2=Faster
+Q40-L433CC.menu.opt.o2.build.flags.optimize=-O2
+Q40-L433CC.menu.opt.o2.build.flags.ldspecs=
+Q40-L433CC.menu.opt.o3=Fastest
+Q40-L433CC.menu.opt.o3.build.flags.optimize=-O3
+Q40-L433CC.menu.opt.o3.build.flags.ldspecs=
+
+# panStamp PUMA
+# ---------------------------------------
+Puma-L476RE.name=Puma-L476RE
+Puma-L476RE.vid.0=0x1209
+Puma-L476RE.pid.0=0x6667
+
+Puma-L476RE.upload.tool=stm32l4_dfu
+Puma-L476RE.upload.protocol=dfu
+Puma-L476RE.upload.maximum_size=507904
+Puma-L476RE.upload.use_1200bps_touch=true
+Puma-L476RE.upload.wait_for_upload_port=false
+Puma-L476RE.upload.native_usb=false
+
+Puma-L476RE.build.mcu=cortex-m4
+Puma-L476RE.build.f_cpu=80000000L
+Puma-L476RE.build.board=STM32L4_PUMA
+Puma-L476RE.build.arch=STM32L4
+Puma-L476RE.build.core=stm32l4
+Puma-L476RE.build.vid=0x1209
+Puma-L476RE.build.pid=0x6667
+Puma-L476RE.build.did=0xffff
+Puma-L476RE.build.usb_manufacturer="Tlera Corporation"
+Puma-L476RE.build.usb_product="Puma"
+Puma-L476RE.build.extra_flags=-DSTM32L476xx -D__FPU_PRESENT=1 -march=armv7e-m -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16 -mabi=aapcs -mslow-flash-data -fsingle-precision-constant {build.usb_flags} {build.dosfs_flags}
+Puma-L476RE.build.ldscript=linker_scripts/STM32L476RE_FLASH.ld
+Puma-L476RE.build.openocdscript=openocd_scripts/stm32l476re_puma.cfg
+Puma-L476RE.build.variant=STM32L476RE-Puma
+Puma-L476RE.build.variant_system_libs="-L{runtime.platform.path}/system/STM32L4xx/Lib" "-L{runtime.platform.path}/system/CMSIS/Lib" -lstm32l476 -larm_cortexM4lf_math
+Puma-L476RE.build.variant_system_include="-I{runtime.platform.path}/system/CMSIS/Include" "-I{runtime.platform.path}/system/CMSIS/Device/ST/STM32L4xx/Include" "-I{runtime.platform.path}/system/STM32L4xx/Include" 
+
+Puma-L476RE.menu.usb.cdc=Serial
+Puma-L476RE.menu.usb.cdc.build.usb_type=USB_TYPE_CDC
+Puma-L476RE.menu.usb.cdc_msc=Serial + Mass Storage
+Puma-L476RE.menu.usb.cdc_msc.build.usb_type=USB_TYPE_CDC_MSC
+Puma-L476RE.menu.usb.cdc_hid=Serial + Keyboard + Mouse
+Puma-L476RE.menu.usb.cdc_hid.build.usb_type=USB_TYPE_CDC_HID
+Puma-L476RE.menu.usb.cdc_msc_hid=Serial + Mass Storage + Keyboard + Mouse
+Puma-L476RE.menu.usb.cdc_msc_hid.build.usb_type=USB_TYPE_CDC_MSC_HID
+Puma-L476RE.menu.usb.none=No USB
+Puma-L476RE.menu.usb.none.build.usb_type=USB_TYPE_NONE
+
+Puma-L476RE.menu.dosfs.sflash=SFLASH (QSPI)
+Puma-L476RE.menu.dosfs.sflash.build.dosfs_sdcard=0
+Puma-L476RE.menu.dosfs.sflash.build.dosfs_sflash=2
+Puma-L476RE.menu.dosfs.sdspi=SDCARD (SPI)
+Puma-L476RE.menu.dosfs.sdspi.build.dosfs_sdcard=1
+Puma-L476RE.menu.dosfs.sdspi.build.dosfs_sflash=0
+Puma-L476RE.menu.dosfs.sdmmc=SDCARD (SDIO Default Speed)
+Puma-L476RE.menu.dosfs.sdmmc.build.dosfs_sdcard=2
+Puma-L476RE.menu.dosfs.sdmmc.build.dosfs_sflash=0
+Puma-L476RE.menu.dosfs.sdmmc1=SDCARD (SDIO High Speed)
+Puma-L476RE.menu.dosfs.sdmmc1.build.dosfs_sdcard=3
+Puma-L476RE.menu.dosfs.sdmmc1.build.dosfs_sflash=0
+Puma-L476RE.menu.dosfs.none=None
+Puma-L476RE.menu.dosfs.none.build.dosfs_sdcard=0
+Puma-L476RE.menu.dosfs.none.build.dosfs_sflash=0
+
+Puma-L476RE.menu.speed.80=80 MHz
+Puma-L476RE.menu.speed.80.build.f_cpu=80000000L
+Puma-L476RE.menu.speed.72=72 MHz
+Puma-L476RE.menu.speed.72.build.f_cpu=72000000L
+Puma-L476RE.menu.speed.64=64 MHz
+Puma-L476RE.menu.speed.64.build.f_cpu=64000000L
+Puma-L476RE.menu.speed.48=48 MHz
+Puma-L476RE.menu.speed.48.build.f_cpu=48000000L
+Puma-L476RE.menu.speed.32=32 MHz
+Puma-L476RE.menu.speed.32.build.f_cpu=32000000L
+Puma-L476RE.menu.speed.24=24 MHz
+Puma-L476RE.menu.speed.24.build.f_cpu=24000000L
+Puma-L476RE.menu.speed.16=16 MHz
+Puma-L476RE.menu.speed.16.build.f_cpu=16000000L
+Puma-L476RE.menu.speed.8=8 MHz (No USB)
+Puma-L476RE.menu.speed.8.build.f_cpu=8000000L
+Puma-L476RE.menu.speed.4=4 MHz (No USB)
+Puma-L476RE.menu.speed.4.build.f_cpu=4000000L
+Puma-L476RE.menu.speed.2=2 MHz (No USB)
+Puma-L476RE.menu.speed.2.build.f_cpu=2000000L
+Puma-L476RE.menu.speed.1=1 MHz (No USB)
+Puma-L476RE.menu.speed.1.build.f_cpu=1000000L
+
+Puma-L476RE.menu.opt.os=Smallest Code
+Puma-L476RE.menu.opt.os.build.flags.optimize=-Os
+Puma-L476RE.menu.opt.os.build.flags.ldspecs=--specs=nano.specs
+Puma-L476RE.menu.opt.o1=Fast
+Puma-L476RE.menu.opt.o1.build.flags.optimize=-O1
+Puma-L476RE.menu.opt.o1.build.flags.ldspecs=
+Puma-L476RE.menu.opt.o2=Faster
+Puma-L476RE.menu.opt.o2.build.flags.optimize=-O2
+Puma-L476RE.menu.opt.o2.build.flags.ldspecs=
+Puma-L476RE.menu.opt.o3=Fastest
+Puma-L476RE.menu.opt.o3.build.flags.optimize=-O3
+Puma-L476RE.menu.opt.o3.build.flags.ldspecs=
