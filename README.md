@@ -12,8 +12,8 @@
  * NUCLEO-L476
 
 ### panStamp
- * [Q4.0](https://www.panstamp.com)
- * [Quantum](https://www.panstamp.com)
+ * [Q4.0](https://www.panstamp.com/home.html)
+ * [Quantum](https://www.panstamp.com/home.html)
 
 ## Installing
 
