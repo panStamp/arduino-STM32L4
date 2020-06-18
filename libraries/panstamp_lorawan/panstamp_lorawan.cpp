@@ -77,6 +77,9 @@ void (*userPeriodicFunct)(osjob_t* j);
 // Pointer to user low power sleep function
 void (*userSleepFunct)(uint16_t sec);
 
+// Pointer to user downlink function
+void (*userDownlinkFunct)(uint8_t * payload, uint16_t length);
+
 /**
  * LMIC do_send function
  */
@@ -190,7 +193,6 @@ void onEvent (ev_t ev)
       }
       else if (userPeriodicFunct != NULL)
         os_setTimedCallback(&sendjob, os_getTime()+sec2osticks(txInterval), userPeriodicFunct);
-
       break;
     case EV_LOST_TSYNC:
       LORAWAN_DEBUG_PRINTLN(F("EV_LOST_TSYNC"));
@@ -264,6 +266,9 @@ void lorawan_init(bool adrMode)
   // Initialize user periodic function
   userPeriodicFunct = NULL;
 
+  // Initialize user downlink function
+  userDownlinkFunct = NULL;
+
   // LMIC init
   os_init();
   // Reset the MAC state. Session and pending data transfers will be discarded.
@@ -287,16 +292,27 @@ PANSTAMP_LORAWAN_STATUS lorawan_run(void)
 {
   os_runloop_once();
 
-  if (askForAck)
+  if (lastEvent == EV_TXCOMPLETE)
   {
-    if (lastEvent == EV_TXCOMPLETE)
+    if (askForAck)
     {
       if (LMIC.txrxFlags & TXRX_ACK)
       {
         LMIC.txrxFlags &= ~TXRX_ACK;
         return PANSTAMP_LORAWAN_STATUS_ACK_RECEIVED;
       }
-    } 
+    }
+
+    if (LMIC.dataLen > 0)
+    {
+      if (userDownlinkFunct != NULL)
+      {
+        uint8_t *payload = LMIC.frame + LMIC.dataBeg;
+        uint16_t length = LMIC.dataLen;
+        LMIC.dataLen = 0;
+        userDownlinkFunct(payload, length);        
+      }
+    }
   }
 
   return PANSTAMP_LORAWAN_STATUS_NONE;
@@ -336,6 +352,18 @@ void lorawan_setUserPeriodicFunct(void (*funct)(osjob_t* j))
 void lorawan_setUserSleepFunct(void (*funct)(uint16_t sec))
 {
   userSleepFunct = funct;
+}
+
+/**
+ * lorawan_setUserDownlinkFunct
+ *
+ * Set user downlink function. To be called whenever a new downlink is received
+ *
+ * @param funct pointer to user function
+ */
+void lorawan_setUserDownlinkFunct(void (*funct)(uint8_t * payload, uint16_t length))
+{
+  userDownlinkFunct = funct;
 }
 
 /**

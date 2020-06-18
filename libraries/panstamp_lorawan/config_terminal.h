@@ -56,6 +56,7 @@
 #define EEPROM_NETSKEY_ADDR    EEPROM_DEVADDR_ADDR + LORAWAN_DEVADDR_SIZE
 #define EEPROM_APPSKEY_ADDR    EEPROM_NETSKEY_ADDR + LORAWAN_NETSKEY_SIZE
 #define EEPROM_TXINTER_ADDR    EEPROM_APPSKEY_ADDR + LORAWAN_APPSKEY_SIZE
+#define EEPROM_USER_ADDR       EEPROM_TXINTER_ADDR + LORAWAN_TXINTER_SIZE
 
 /**
  * Working modes
@@ -325,6 +326,29 @@ class CONFIG_TERMINAL
     }
 
     /**
+     * saveTxIntervalInEeprom
+     *
+     * Save transmission interval in "EEPROM"
+     *
+     * @param interval : transmission interval (in sec) in string format
+     *
+     * @return true in case of tx interval successfully saved in EEPROM space
+     */
+    inline bool saveTxIntervalInEeprom(char *interval)
+    {
+      uint16_t txInterval = (uint16_t) atoi(interval);
+
+      if (txInterval == 0)
+        return false;
+
+      // Save device address
+      for(int i=0 ; i<LORAWAN_TXINTER_SIZE ; i++)
+        EEPROM.write(EEPROM_TXINTER_ADDR + i, (txInterval >> 8*(LORAWAN_TXINTER_SIZE-1-i)) & 0xFF);
+
+      return true;
+    }
+
+    /**
      * saveSessionKeysInEeprom
      *
      * Save LoRaWAN session keys in "EEPROM"
@@ -362,30 +386,6 @@ class CONFIG_TERMINAL
 
       return true;
     }
-
-    /**
-     * saveTxIntervalInEeprom
-     *
-     * Save transmission interval in "EEPROM"
-     *
-     * @param interval : transmission interval (in sec) in string format
-     *
-     * @return true in case of tx interval successfully saved in EEPROM space
-     */
-    inline bool saveTxIntervalInEeprom(char *interval)
-    {
-      uint16_t txInterval = (uint16_t) atoi(interval);
-
-      if (txInterval == 0)
-        return false;
-
-      // Save device address
-      for(int i=0 ; i<LORAWAN_TXINTER_SIZE ; i++)
-        EEPROM.write(EEPROM_TXINTER_ADDR + i, (txInterval >> 8*(LORAWAN_TXINTER_SIZE-1-i)) & 0xFF);
-
-      return true;
-    }
-
 
     /**
      * printEepromContents
@@ -684,6 +684,27 @@ class CONFIG_TERMINAL
       return true;
     }
 
+    /**
+     * saveTxIntervalInEeprom
+     *
+     * Save transmission interval in "EEPROM"
+     *
+     * @param interval : transmission interval (in sec)
+     *
+     * @return true in case of tx interval successfully saved in EEPROM space
+     */
+    inline bool saveTxIntervalInEeprom(uint16_t interval)
+    {
+      if (interval == 0)
+        return false;
+
+      // Save device address
+      for(int i=0 ; i<LORAWAN_TXINTER_SIZE ; i++)
+        EEPROM.write(EEPROM_TXINTER_ADDR + i, (interval >> 8*(LORAWAN_TXINTER_SIZE-1-i)) & 0xFF);
+
+      return true;
+    }
+    
     /**
      * processSerial
      * 

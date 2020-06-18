@@ -111,6 +111,15 @@ extern void lorawan_setUserPeriodicFunct(void (*funct)(osjob_t* j));
 extern void lorawan_setUserSleepFunct(void (*funct)(uint16_t sec));
 
 /**
+ * lorawan_setUserDownlinkFunct
+ *
+ * Set user downlink function. To be called whenever a new downlink is received
+ *
+ * @param funct pointer to user function
+ */
+extern void lorawan_setUserDownlinkFunct(void (*funct)(uint8_t * payload, uint16_t length));
+
+/**
  * lorawan_setDevEui
  *
  * Set LoRaWAN Device EUI (Little Endian)
@@ -219,7 +228,7 @@ class PANSTAMP_LORAWAN
      * @param interval Tx interval
      * @param downLinksEn Downlinks enable flag
      */
-    inline PANSTAMP_LORAWAN(const uint16_t interval, bool downLinksEn=false)
+    inline PANSTAMP_LORAWAN(const uint16_t interval, bool downLinksEn=true)
     {
       enableSerialConfig = false;
       downlinksEnabled = downLinksEn;
@@ -254,9 +263,8 @@ class PANSTAMP_LORAWAN
      * Initialize LoRaWAN LMIC stack
      *
      * @param adrMode Enable ADR mode if true
-     * @param downLink Enable downlinks if true
      */
-    inline void begin(bool adrMode=false, bool downLink=false)
+    inline void begin(bool adrMode=false)
     {
       LORAWAN_DEBUG_BEGIN(115200);
 
@@ -284,7 +292,7 @@ class PANSTAMP_LORAWAN
       lorawan_init(adrMode);
       
       // Set downlinks
-      setDownlinks(downLink);
+      setDownlinks(downlinksEnabled);
       
       // Working mode other than OTAA?
       if ((mode == LORAWAN_WORKING_MODE_ABP) || (mode == LORAWAN_WORKING_MODE_MIXED))
@@ -420,16 +428,32 @@ class PANSTAMP_LORAWAN
     }
 
     /**
+     * getTxInterval
+     *
+     * Get tx interval
+     *
+     * @return TX interval in seconds
+     */
+    inline uint16_t getTxInterval(void)
+    {
+      return txInterval;
+    }
+
+    /**
      * setTxInterval
      *
      * Set tx interval
      *
-     * @param sec New tx interval in seconds
+     * @param sec : new tx interval in seconds
+     * @param save : save parameter in EEPROM if this argument is true
      */
-    inline void setTxInterval(uint16_t sec)
+    inline void setTxInterval(uint16_t sec, bool save = false)
     {
       txInterval = sec;
       lorawan_setTxInterval(sec);
+
+      if (save)
+        config.saveTxIntervalInEeprom(txInterval);
     }
 
     /**
@@ -466,6 +490,18 @@ class PANSTAMP_LORAWAN
     inline void setUserSleepFunct(void (*funct)(uint16_t sec))
     {
       lorawan_setUserSleepFunct(funct);
+    }
+
+  /**
+   * setUserDownlinkFunct
+   *
+   * Set user downlink function. To be called whenever a new downlink is received
+   *
+   * @param funct pointer to user function
+   */
+    inline void setUserDownlinkFunct(void (*funct)(uint8_t * payload, uint16_t length))
+    {
+      lorawan_setUserDownlinkFunct(funct);
     }
 
     /**
